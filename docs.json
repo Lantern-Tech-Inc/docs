@@ -1,0 +1,124 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Lantern",
+  "colors": {
+    "primary": "#EA580C",
+    "light": "#FB923C",
+    "dark": "#C2410C"
+  },
+  "favicon": "/favicon.ico",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Technical Optimization",
+            "pages": [
+              "technical/robots-txt",
+              "technical/sitemap",
+              "technical/llms-txt",
+              "technical/security",
+              "technical/core-web-vitals"
+            ]
+          },
+          {
+            "group": "Content Structure",
+            "pages": [
+              "content/structured-data",
+              "content/meta-tags",
+              "content/heading-structure",
+              "content/hreflang"
+            ]
+          },
+          {
+            "group": "GEO Strategy",
+            "pages": [
+              "geo/what-is-geo",
+              "geo/geo-vs-seo"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API reference",
+        "groups": [
+          {
+            "group": "API documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Endpoint examples",
+            "pages": [
+              "api-reference/endpoint/get",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/delete",
+              "api-reference/endpoint/webhook"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Dashboard",
+          "href": "https://app.asklantern.com",
+          "icon": "chart-line"
+        },
+        {
+          "anchor": "Website",
+          "href": "https://asklantern.com",
+          "icon": "globe"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "https://asklantern.com/lantern.jpg",
+    "dark": "https://asklantern.com/lantern.jpg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:collins@asklantern.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://app.asklantern.com"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/asklantern",
+      "github": "https://github.com/asklantern",
+      "linkedin": "https://linkedin.com/company/asklantern"
+    }
+  }
+}

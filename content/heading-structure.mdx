@@ -1,0 +1,460 @@
+---
+title: "Heading Structure & Hierarchy"
+description: "Optimize heading tags (H1-H6) to help AI understand your content organization"
+---
+
+## Why Heading Structure Matters
+
+Proper heading hierarchy helps AI platforms understand your content's organization, main topics, and relationships between sections. It's one of the easiest and most impactful on-page SEO improvements you can make.
+
+<Info>
+  **AI Insight**: AI platforms like ChatGPT and Perplexity use heading structure to extract key information and determine what to cite from your content.
+</Info>
+
+## The Heading Hierarchy
+
+### H1 - Main Page Title
+- ✅ Only ONE H1 per page
+- ✅ Should match or closely mirror your title tag
+- ✅ Describes the main topic of the page
+- ✅ 20-70 characters optimal
+
+```html
+<h1>AI Search Analytics Platform for Marketing Teams</h1>
+```
+
+### H2 - Main Sections
+- ✅ Multiple H2s allowed
+- ✅ Breaks content into major topics
+- ✅ Should form a logical outline
+
+```html
+<h2>Real-time Brand Monitoring</h2>
+<h2>Attribution Tracking</h2>
+<h2>Citation Analysis</h2>
+```
+
+### H3 - Subsections
+- ✅ Child topics under H2
+- ✅ Provides additional detail
+
+```html
+<h2>Real-time Brand Monitoring</h2>
+  <h3>Track ChatGPT Mentions</h3>
+  <h3>Monitor Perplexity Results</h3>
+  <h3>Analyze Gemini Responses</h3>
+```
+
+### H4-H6 - Deeper Levels
+- ✅ Use sparingly
+- ✅ For complex, detailed content
+- ✅ Maintain logical hierarchy
+
+## Proper Heading Hierarchy Example
+
+```html
+<article>
+  <!-- Main Title -->
+  <h1>Complete Guide to AI Search Optimization</h1>
+  
+  <!-- Introduction (optional) -->
+  <p>Learn how to optimize your content for AI platforms...</p>
+  
+  <!-- Major Section 1 -->
+  <h2>Understanding AI Search</h2>
+  <p>AI search refers to...</p>
+  
+    <!-- Subsection 1.1 -->
+    <h3>What is AI Search?</h3>
+    <p>Content about AI search basics...</p>
+    
+    <!-- Subsection 1.2 -->
+    <h3>How AI Search Differs from Traditional SEO</h3>
+    <p>Key differences include...</p>
+    
+      <!-- Sub-subsection 1.2.1 -->
+      <h4>Crawling and Indexing</h4>
+      <p>AI platforms crawl differently...</p>
+      
+      <!-- Sub-subsection 1.2.2 -->
+      <h4>Ranking Factors</h4>
+      <p>AI prioritizes different signals...</p>
+  
+  <!-- Major Section 2 -->
+  <h2>Technical Optimization</h2>
+  <p>Technical aspects of AI search...</p>
+  
+    <h3>Structured Data</h3>
+    <p>Schema markup helps AI...</p>
+    
+    <h3>Meta Tags</h3>
+    <p>Essential meta tags include...</p>
+  
+  <!-- Major Section 3 -->
+  <h2>Content Strategy</h2>
+  <p>Creating AI-friendly content...</p>
+</article>
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion icon="1" title="One H1 per page">
+    Use exactly one H1 tag that describes the page's main topic:
+    
+    ```html
+    <!-- Good -->
+    <h1>Lantern: AI Search Analytics Platform</h1>
+    
+    <!-- Bad: Multiple H1s -->
+    <h1>Welcome</h1>
+    <h1>Our Product</h1>
+    <h1>Get Started</h1>
+    ```
+  </Accordion>
+
+  <Accordion icon="list-ol" title="Don't skip levels">
+    Maintain hierarchical order (don't jump from H2 to H4):
+    
+    ```html
+    <!-- Good -->
+    <h2>Main Topic</h2>
+      <h3>Subtopic</h3>
+        <h4>Detail</h4>
+    
+    <!-- Bad: Skipping H3 -->
+    <h2>Main Topic</h2>
+      <h4>Detail</h4>
+    ```
+  </Accordion>
+
+  <Accordion icon="text" title="Use descriptive text">
+    Make headings clear and descriptive:
+    
+    ```html
+    <!-- Good -->
+    <h2>How to Track Brand Mentions in ChatGPT</h2>
+    
+    <!-- Bad -->
+    <h2>Introduction</h2>
+    <h2>Next Steps</h2>
+    <h2>Learn More</h2>
+    ```
+  </Accordion>
+
+  <Accordion icon="key" title="Include keywords naturally">
+    Use target keywords in headings when natural:
+    
+    ```html
+    <!-- Good -->
+    <h1>AI Search Analytics: Track Brand Visibility Across AI Platforms</h1>
+    <h2>Monitor ChatGPT and Perplexity Brand Mentions</h2>
+    
+    <!-- Bad: Keyword stuffing -->
+    <h1>AI Search Analytics AI Search Tool AI Platform AI Tracking</h1>
+    ```
+  </Accordion>
+
+  <Accordion icon="ban" title="Don't use headings for styling">
+    Never use headings just to make text bigger:
+    
+    ```html
+    <!-- Bad: Using H3 for styling -->
+    <h3>Click here for more info</h3>
+    
+    <!-- Good: Use CSS for styling -->
+    <p class="large-text">Click here for more info</p>
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Heading Patterns for Different Content Types
+
+### Blog Posts / Articles
+
+```html
+<article>
+  <h1>How to Optimize Your Website for AI Search in 2026</h1>
+  
+  <h2>Why AI Search Optimization Matters</h2>
+  <p>1.5 billion people use AI search...</p>
+  
+  <h2>5 Key Steps to AI Search Success</h2>
+  
+    <h3>1. Implement Structured Data</h3>
+    <p>Add schema markup...</p>
+    
+    <h3>2. Optimize Meta Tags</h3>
+    <p>Craft compelling titles...</p>
+    
+    <h3>3. Create Quality Content</h3>
+    <p>Focus on authority...</p>
+  
+  <h2>Common AI Search Mistakes to Avoid</h2>
+  
+  <h2>Measuring AI Search Success</h2>
+</article>
+```
+
+### Product Pages
+
+```html
+<main>
+  <h1>AI Search Analytics Platform - Lantern</h1>
+  
+  <h2>Key Features</h2>
+    <h3>Real-time Monitoring</h3>
+    <h3>Attribution Tracking</h3>
+    <h3>Citation Intelligence</h3>
+  
+  <h2>How It Works</h2>
+    <h3>Step 1: Connect Your Brand</h3>
+    <h3>Step 2: Configure Tracking</h3>
+    <h3>Step 3: Analyze Results</h3>
+  
+  <h2>Pricing Plans</h2>
+    <h3>Starter Plan</h3>
+    <h3>Professional Plan</h3>
+    <h3>Enterprise Plan</h3>
+  
+  <h2>Customer Testimonials</h2>
+</main>
+```
+
+### Documentation Pages
+
+```html
+<article>
+  <h1>Getting Started with Lantern</h1>
+  
+  <h2>Prerequisites</h2>
+  
+  <h2>Installation</h2>
+    <h3>Create Your Account</h3>
+    <h3>Install Tracking Code</h3>
+    <h3>Configure Monitoring</h3>
+  
+  <h2>Configuration</h2>
+    <h3>Basic Settings</h3>
+      <h4>Brand Profile</h4>
+      <h4>AI Platforms</h4>
+    <h3>Advanced Settings</h3>
+      <h4>Custom Prompts</h4>
+      <h4>Alert Rules</h4>
+  
+  <h2>Troubleshooting</h2>
+</article>
+```
+
+### Landing Pages
+
+```html
+<main>
+  <h1>Track Your Brand Across All AI Platforms</h1>
+  
+  <h2>The Problem</h2>
+  <p>1.5B people use AI search but you can't see your brand mentions...</p>
+  
+  <h2>The Solution</h2>
+  <p>Lantern monitors your brand across ChatGPT, Perplexity, Gemini, and Claude...</p>
+  
+  <h2>Key Benefits</h2>
+    <h3>Real-time Visibility</h3>
+    <h3>Attribution Data</h3>
+    <h3>Competitive Intelligence</h3>
+  
+  <h2>How It Works</h2>
+  
+  <h2>Start Your Free Trial</h2>
+</main>
+```
+
+## SEO Benefits of Proper Heading Structure
+
+<CardGroup cols={2}>
+  <Card title="Content Understanding" icon="brain">
+    AI instantly understands your content structure and main topics
+  </Card>
+  
+  <Card title="Featured Snippets" icon="star">
+    Proper headings increase chances of being cited in AI responses
+  </Card>
+  
+  <Card title="Better Crawling" icon="spider">
+    Search engines and AI crawl more efficiently
+  </Card>
+  
+  <Card title="User Experience" icon="user">
+    Clear hierarchy improves readability and navigation
+  </Card>
+  
+  <Card title="Accessibility" icon="universal-access">
+    Screen readers rely on heading structure
+  </Card>
+  
+  <Card title="Topic Authority" icon="award">
+    Shows topical depth and expertise to AI
+  </Card>
+</CardGroup>
+
+## Testing Your Heading Structure
+
+<Steps>
+  <Step title="View as outline">
+    Look at just your headings - do they form a logical outline?
+    
+    ```
+    H1: AI Search Analytics Platform
+      H2: Features
+        H3: Real-time Monitoring
+        H3: Attribution Tracking
+      H2: Pricing
+        H3: Starter Plan
+        H3: Pro Plan
+    ```
+  </Step>
+  
+  <Step title="Check hierarchy">
+    Ensure no levels are skipped (H2 → H3 → H4, not H2 → H4)
+  </Step>
+  
+  <Step title="Count H1s">
+    Verify you have exactly one H1 per page
+  </Step>
+  
+  <Step title="Use browser tools">
+    Browser extensions like HeadingsMap can visualize structure
+  </Step>
+  
+  <Step title="Ask AI">
+    Paste your content into ChatGPT and ask "What are the main topics?"
+  </Step>
+</Steps>
+
+## Common Mistakes and Fixes
+
+| Mistake | Problem | Fix |
+|---------|---------|-----|
+| Multiple H1s | Confuses AI about main topic | Use only one H1 |
+| Skipping levels | Breaks hierarchy logic | Use sequential levels |
+| Generic headings | Not descriptive enough | Make specific and clear |
+| All H2s | No content hierarchy | Use H3s for subsections |
+| Headings for style | Semantic confusion | Use CSS for styling |
+| No keywords | Missing SEO opportunity | Include target keywords naturally |
+| Too long | Hard to scan | Keep concise (5-10 words) |
+
+## Heading Length Guidelines
+
+<AccordionGroup>
+  <Accordion icon="1" title="H1: 20-70 characters">
+    ```html
+    <!-- Good -->
+    <h1>AI Search Analytics Platform for Marketers</h1>
+    
+    <!-- Too short -->
+    <h1>Analytics</h1>
+    
+    <!-- Too long -->
+    <h1>The Complete AI Search Analytics Platform for Marketing Teams Who Want to Track Brand Visibility</h1>
+    ```
+  </Accordion>
+  
+  <Accordion icon="2" title="H2: 20-60 characters">
+    ```html
+    <!-- Good -->
+    <h2>Real-time Brand Monitoring</h2>
+    
+    <!-- Good -->
+    <h2>How to Track ChatGPT Mentions</h2>
+    ```
+  </Accordion>
+  
+  <Accordion icon="3" title="H3-H6: Flexible">
+    Can be shorter or longer based on content needs
+    
+    ```html
+    <h3>Installation</h3>
+    <h3>Configure Your Brand Profile Settings</h3>
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Accessibility Considerations
+
+Proper heading structure is essential for accessibility:
+
+```html
+<!-- Good: Clear hierarchy for screen readers -->
+<h1>Getting Started Guide</h1>
+  <h2>Step 1: Installation</h2>
+    <h3>Download the Package</h3>
+    <h3>Install Dependencies</h3>
+  <h2>Step 2: Configuration</h2>
+    <h3>Basic Settings</h3>
+    <h3>Advanced Options</h3>
+```
+
+<Tip>
+  Use ARIA labels when needed:
+  ```html
+  <h2 aria-label="Section about pricing plans">💰 Pricing</h2>
+  ```
+</Tip>
+
+## Tools for Analyzing Heading Structure
+
+<CardGroup cols={2}>
+  <Card title="HeadingsMap Extension" icon="puzzle-piece">
+    Browser extension visualizing heading hierarchy
+  </Card>
+  
+  <Card title="WAVE Tool" icon="water">
+    Accessibility checker including heading structure
+  </Card>
+  
+  <Card title="Screaming Frog" icon="spider">
+    SEO crawler analyzing heading usage
+  </Card>
+  
+  <Card title="Lantern Dashboard" icon="chart-line">
+    Track how AI interprets your headings
+  </Card>
+</CardGroup>
+
+## Heading Structure Checklist
+
+<Steps>
+  <Step title="One H1">
+    ✅ Exactly one H1 per page
+  </Step>
+  
+  <Step title="Logical hierarchy">
+    ✅ No skipped levels (H2 → H3 → H4)
+  </Step>
+  
+  <Step title="Descriptive text">
+    ✅ Clear, specific heading text
+  </Step>
+  
+  <Step title="Keywords included">
+    ✅ Natural keyword usage in headings
+  </Step>
+  
+  <Step title="Proper nesting">
+    ✅ H3s under H2s, H4s under H3s
+  </Step>
+  
+  <Step title="Scannable outline">
+    ✅ Headings form logical outline
+  </Step>
+</Steps>
+
+<Warning>
+  **Don't overdo it**: While headings are important, don't force them. Use them naturally to organize your content.
+</Warning>
+
+## Next Steps
+
+<Card title="Learn about hreflang" icon="globe" href="/content/hreflang">
+  Optimize for international audiences with proper hreflang implementation
+</Card>

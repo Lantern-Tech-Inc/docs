@@ -1,0 +1,444 @@
+---
+title: "Structured Data & Schema Markup"
+description: "Implement schema markup to help AI understand and cite your content"
+---
+
+## What is Structured Data?
+
+Structured data (schema markup) is code that helps AI systems and search engines understand your content's meaning, context, and relationships. It's one of the most critical factors for AI search visibility.
+
+<Info>
+  **Why it matters**: AI platforms like ChatGPT and Perplexity use structured data to understand what your content is about and determine when to cite it.
+</Info>
+
+## Types of Schema Markup for AI Search
+
+### 1. Organization Schema
+
+Tell AI who you are:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Lantern",
+  "url": "https://asklantern.com",
+  "logo": "https://asklantern.com/logo.png",
+  "description": "AI search analytics platform that tracks brand visibility across ChatGPT, Perplexity, Gemini, and Claude",
+  "foundingDate": "2024",
+  "sameAs": [
+    "https://twitter.com/asklantern",
+    "https://linkedin.com/company/asklantern",
+    "https://github.com/asklantern"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Customer Support",
+    "email": "support@asklantern.com",
+    "url": "https://asklantern.com/contact"
+  }
+}
+```
+
+### 2. Product Schema
+
+For product pages:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Lantern AI Search Analytics",
+  "description": "Track brand mentions across AI platforms with real-time monitoring and attribution",
+  "brand": {
+    "@type": "Brand",
+    "name": "Lantern"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "99.00",
+    "priceCurrency": "USD",
+    "priceValidUntil": "2026-12-31",
+    "availability": "https://schema.org/InStock",
+    "url": "https://asklantern.com/pricing"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "127"
+  }
+}
+```
+
+### 3. Article Schema
+
+For blog posts and content:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Optimize Your Content for AI Search",
+  "description": "Complete guide to making your content discoverable by ChatGPT, Perplexity, and other AI platforms",
+  "author": {
+    "@type": "Person",
+    "name": "Jane Smith",
+    "url": "https://asklantern.com/authors/jane-smith"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Lantern",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://asklantern.com/logo.png"
+    }
+  },
+  "datePublished": "2026-01-21",
+  "dateModified": "2026-01-21",
+  "image": "https://asklantern.com/blog/ai-search-guide.jpg",
+  "articleBody": "Full article text here..."
+}
+```
+
+### 4. FAQ Schema
+
+For FAQ pages (highly cited by AI):
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is AI search?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI search refers to search engines powered by large language models like ChatGPT, Perplexity, Gemini, and Claude. Over 1.5 billion people use AI search monthly to find information, products, and services."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Lantern track AI search visibility?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lantern monitors brand mentions across all major AI platforms in real-time, tracking when and how AI systems cite your brand, products, or content."
+      }
+    }
+  ]
+}
+```
+
+### 5. HowTo Schema
+
+For guides and tutorials:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Set Up AI Search Tracking",
+  "description": "Step-by-step guide to start tracking your brand in AI search",
+  "totalTime": "PT15M",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Create Account",
+      "text": "Sign up for Lantern at asklantern.com",
+      "url": "https://asklantern.com/signup"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Configure Monitoring",
+      "text": "Add your brand name and select AI platforms to track",
+      "url": "https://docs.asklantern.com/quickstart#configure"
+    }
+  ]
+}
+```
+
+### 6. BreadcrumbList Schema
+
+For navigation context:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://asklantern.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Documentation",
+      "item": "https://docs.asklantern.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Structured Data",
+      "item": "https://docs.asklantern.com/content/structured-data"
+    }
+  ]
+}
+```
+
+## Implementation Methods
+
+<Tabs>
+  <Tab title="JSON-LD (Recommended)">
+    Add to your HTML `<head>` section:
+    
+    ```html
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Lantern",
+      "url": "https://asklantern.com"
+    }
+    </script>
+    ```
+    
+    <Tip>JSON-LD is the preferred format - it's easy to implement and doesn't affect page rendering.</Tip>
+  </Tab>
+  
+  <Tab title="Microdata">
+    Inline HTML attributes:
+    
+    ```html
+    <div itemscope itemtype="https://schema.org/Organization">
+      <span itemprop="name">Lantern</span>
+      <span itemprop="description">AI search analytics platform</span>
+    </div>
+    ```
+  </Tab>
+  
+  <Tab title="RDFa">
+    Using RDFa attributes:
+    
+    ```html
+    <div vocab="https://schema.org/" typeof="Organization">
+      <span property="name">Lantern</span>
+      <span property="description">AI search analytics</span>
+    </div>
+    ```
+  </Tab>
+</Tabs>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion icon="check-double" title="Use multiple schema types">
+    Combine relevant schemas on each page:
+    
+    ```html
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Lantern",
+          "url": "https://asklantern.com"
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://asklantern.com",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://asklantern.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+    ```
+  </Accordion>
+
+  <Accordion icon="calendar" title="Keep data current">
+    Update dates, prices, and availability regularly:
+    
+    ```json
+    {
+      "@type": "Offer",
+      "price": "99.00",
+      "priceCurrency": "USD",
+      "priceValidUntil": "2026-12-31",
+      "availability": "https://schema.org/InStock"
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="quote-left" title="Match visible content">
+    Schema should reflect what's actually on the page:
+    
+    ```json
+    {
+      "@type": "Article",
+      "headline": "Same headline as your H1 tag",
+      "articleBody": "Should match your actual article content"
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="link" title="Include relationships">
+    Connect entities with proper relationships:
+    
+    ```json
+    {
+      "@type": "Article",
+      "author": {
+        "@type": "Person",
+        "name": "Jane Smith"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lantern"
+      }
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Essential Schema Properties
+
+<CardGroup cols={2}>
+  <Card title="Name" icon="tag">
+    Always include a clear, descriptive name
+  </Card>
+  
+  <Card title="Description" icon="file-lines">
+    Add concise descriptions (150-200 characters)
+  </Card>
+  
+  <Card title="URL" icon="link">
+    Include canonical URLs for all entities
+  </Card>
+  
+  <Card title="Images" icon="image">
+    High-quality images with alt text
+  </Card>
+  
+  <Card title="Dates" icon="calendar">
+    Published, modified, and validity dates
+  </Card>
+  
+  <Card title="Author" icon="user">
+    Author information for content
+  </Card>
+  
+  <Card title="Ratings" icon="star">
+    Aggregate ratings when available
+  </Card>
+  
+  <Card title="Contact" icon="envelope">
+    Contact points and support info
+  </Card>
+</CardGroup>
+
+## Testing Your Schema
+
+<Steps>
+  <Step title="Google Rich Results Test">
+    Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to validate
+  </Step>
+  
+  <Step title="Schema.org Validator">
+    Test at [validator.schema.org](https://validator.schema.org/)
+  </Step>
+  
+  <Step title="Check with AI">
+    Ask ChatGPT or Claude to read your page and confirm it understands the structure
+  </Step>
+  
+  <Step title="Monitor in Lantern">
+    Track how AI platforms interpret and cite your structured data
+  </Step>
+</Steps>
+
+## Common Schema Types for AI Search
+
+| Schema Type | Use Case | AI Citation Impact |
+|------------|----------|-------------------|
+| Organization | Company info | ⭐⭐⭐⭐⭐ Very High |
+| Product | Product pages | ⭐⭐⭐⭐⭐ Very High |
+| Article | Blog posts | ⭐⭐⭐⭐⭐ Very High |
+| FAQPage | FAQ sections | ⭐⭐⭐⭐⭐ Very High |
+| HowTo | Guides | ⭐⭐⭐⭐ High |
+| Review | Customer reviews | ⭐⭐⭐⭐ High |
+| WebSite | Homepage | ⭐⭐⭐ Medium |
+| BreadcrumbList | Navigation | ⭐⭐⭐ Medium |
+| LocalBusiness | Local companies | ⭐⭐⭐⭐ High |
+| SoftwareApplication | Software products | ⭐⭐⭐⭐⭐ Very High |
+
+## Complete Page Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lantern - AI Search Analytics Platform</title>
+  
+  <!-- Multiple Schema Types -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://asklantern.com/#organization",
+        "name": "Lantern",
+        "url": "https://asklantern.com",
+        "logo": "https://asklantern.com/logo.png",
+        "sameAs": [
+          "https://twitter.com/asklantern",
+          "https://linkedin.com/company/asklantern"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://asklantern.com/#website",
+        "url": "https://asklantern.com",
+        "name": "Lantern",
+        "publisher": {
+          "@id": "https://asklantern.com/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://asklantern.com/#webpage",
+        "url": "https://asklantern.com",
+        "name": "AI Search Analytics Platform",
+        "isPartOf": {
+          "@id": "https://asklantern.com/#website"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <!-- Your content here -->
+</body>
+</html>
+```
+
+<Warning>
+  **Avoid spam**: Don't add schema for content that doesn't exist on the page. AI platforms and search engines penalize misleading markup.
+</Warning>
+
+## Next Steps
+
+<Card title="Optimize Meta Tags" icon="tags" href="/content/meta-tags">
+  Learn how to write effective meta tags for AI search
+</Card>

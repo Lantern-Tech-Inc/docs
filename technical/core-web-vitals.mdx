@@ -1,0 +1,558 @@
+---
+title: "Core Web Vitals & Performance"
+description: "Optimize LCP, FID, and CLS for better AI search rankings and user experience"
+---
+
+## What Are Core Web Vitals?
+
+Core Web Vitals are Google's standardized metrics for measuring user experience on the web. They're critical for both traditional SEO and AI search visibility because fast, stable pages provide better data for AI platforms to crawl and cite.
+
+<Info>
+  **AI Search Impact**: AI platforms prioritize fast-loading, well-performing sites when selecting sources to cite. Poor Core Web Vitals can hurt your visibility.
+</Info>
+
+## The Three Core Web Vitals
+
+### 1. Largest Contentful Paint (LCP)
+
+**What it measures**: Loading performance - how long it takes for the main content to load.
+
+**Target**: ✅ Good: ≤ 2.5 seconds | ⚠️ Needs Improvement: 2.5-4.0s | ❌ Poor: > 4.0s
+
+<AccordionGroup>
+  <Accordion icon="image" title="Optimize images">
+    Images are the most common LCP element:
+    
+    **Use modern formats:**
+    ```html
+    <picture>
+      <source srcset="hero.webp" type="image/webp">
+      <source srcset="hero.jpg" type="image/jpeg">
+      <img src="hero.jpg" alt="Hero image" loading="lazy">
+    </picture>
+    ```
+    
+    **Compress images:**
+    - Use tools like TinyPNG, ImageOptim, or Squoosh
+    - Target: < 100KB for hero images
+    - Use appropriate dimensions (don't load 4K images)
+    
+    **Add size attributes:**
+    ```html
+    <img src="hero.jpg" width="1200" height="600" alt="Hero">
+    ```
+  </Accordion>
+
+  <Accordion icon="server" title="Improve server response time">
+    Faster server = faster LCP:
+    
+    **Use a CDN:**
+    - Cloudflare, Fastly, or AWS CloudFront
+    - Serve content from locations near users
+    
+    **Enable caching:**
+    ```nginx
+    # Nginx cache example
+    location / {
+        proxy_cache_valid 200 1h;
+        add_header Cache-Control "public, max-age=3600";
+    }
+    ```
+    
+    **Optimize database queries:**
+    - Use indexes
+    - Cache frequent queries
+    - Use connection pooling
+  </Accordion>
+
+  <Accordion icon="file-code" title="Remove render-blocking resources">
+    CSS and JavaScript can block page rendering:
+    
+    **Inline critical CSS:**
+    ```html
+    <head>
+      <style>
+        /* Critical CSS for above-the-fold content */
+        .hero { display: block; }
+        .header { position: fixed; }
+      </style>
+      
+      <!-- Load full CSS asynchronously -->
+      <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    </head>
+    ```
+    
+    **Defer non-critical JavaScript:**
+    ```html
+    <script src="analytics.js" defer></script>
+    <script src="chat-widget.js" async></script>
+    ```
+  </Accordion>
+
+  <Accordion icon="font" title="Optimize web fonts">
+    Fonts can significantly impact LCP:
+    
+    ```html
+    <head>
+      <!-- Preload important fonts -->
+      <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+      
+      <!-- Use font-display: swap -->
+      <style>
+        @font-face {
+          font-family: 'Inter';
+          src: url('/fonts/inter-var.woff2') format('woff2');
+          font-display: swap; /* Shows fallback font while loading */
+        }
+      </style>
+    </head>
+    ```
+  </Accordion>
+</AccordionGroup>
+
+### 2. First Input Delay (FID)
+
+**What it measures**: Interactivity - how quickly the page responds to user interactions.
+
+**Target**: ✅ Good: ≤ 100ms | ⚠️ Needs Improvement: 100-300ms | ❌ Poor: > 300ms
+
+<AccordionGroup>
+  <Accordion icon="bolt" title="Reduce JavaScript execution time">
+    Heavy JavaScript blocks the main thread:
+    
+    **Code splitting:**
+    ```javascript
+    // Load features on demand
+    const Analytics = lazy(() => import('./Analytics'));
+    const ChatWidget = lazy(() => import('./ChatWidget'));
+    ```
+    
+    **Use web workers:**
+    ```javascript
+    // Move heavy computations off main thread
+    const worker = new Worker('processor.js');
+    worker.postMessage(data);
+    worker.onmessage = (e) => {
+      console.log('Result:', e.data);
+    };
+    ```
+  </Accordion>
+
+  <Accordion icon="scissors" title="Break up long tasks">
+    Tasks over 50ms block interactivity:
+    
+    ```javascript
+    // Bad: Blocks main thread
+    function processLargeArray(items) {
+      items.forEach(item => {
+        heavyProcessing(item);
+      });
+    }
+    
+    // Good: Break into chunks
+    async function processLargeArray(items) {
+      for (let i = 0; i < items.length; i++) {
+        heavyProcessing(items[i]);
+        
+        // Yield to browser every 50 items
+        if (i % 50 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 0));
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="download" title="Minimize third-party code">
+    Third-party scripts can hurt FID:
+    
+    **Audit third-party scripts:**
+    - Remove unused analytics/tracking
+    - Load non-critical scripts asynchronously
+    - Use facade patterns for heavy widgets
+    
+    ```html
+    <!-- Lazy load third-party widgets -->
+    <div id="chat-widget" data-src="https://example.com/widget.js">
+      <button onclick="loadChatWidget()">Load Chat</button>
+    </div>
+    ```
+  </Accordion>
+</AccordionGroup>
+
+### 3. Cumulative Layout Shift (CLS)
+
+**What it measures**: Visual stability - how much content shifts unexpectedly during loading.
+
+**Target**: ✅ Good: ≤ 0.1 | ⚠️ Needs Improvement: 0.1-0.25 | ❌ Poor: > 0.25
+
+<AccordionGroup>
+  <Accordion icon="ruler" title="Reserve space for images and embeds">
+    Always specify dimensions to prevent layout shifts:
+    
+    ```html
+    <!-- Bad: No dimensions -->
+    <img src="hero.jpg" alt="Hero">
+    
+    <!-- Good: With dimensions -->
+    <img src="hero.jpg" width="1200" height="600" alt="Hero">
+    
+    <!-- Best: Use aspect ratio -->
+    <img src="hero.jpg" 
+         width="1200" 
+         height="600" 
+         style="aspect-ratio: 2/1; width: 100%; height: auto;" 
+         alt="Hero">
+    ```
+    
+    **For responsive images:**
+    ```css
+    .responsive-image {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      height: auto;
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="text" title="Reserve space for dynamic content">
+    Prevent shifts from loading content:
+    
+    ```html
+    <!-- Reserve space with min-height -->
+    <div class="banner" style="min-height: 60px;">
+      <!-- Banner loaded dynamically -->
+    </div>
+    
+    <!-- Use skeleton screens -->
+    <div class="content-skeleton" aria-hidden="true">
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line"></div>
+      <div class="skeleton-line"></div>
+    </div>
+    ```
+    
+    **CSS for skeleton screens:**
+    ```css
+    .skeleton-line {
+      height: 20px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="font" title="Avoid invisible text during font loading">
+    Use font-display to prevent layout shifts:
+    
+    ```css
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('/fonts/custom.woff2') format('woff2');
+      font-display: swap; /* Show fallback immediately */
+    }
+    
+    /* Or use optional for minimal shift */
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('/fonts/custom.woff2') format('woff2');
+      font-display: optional; /* Skip if not cached */
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="ban" title="Don't inject content above existing content">
+    Avoid adding content that pushes down existing content:
+    
+    ```javascript
+    // Bad: Inserting banner above content
+    document.body.insertAdjacentHTML('afterbegin', bannerHTML);
+    
+    // Good: Append to designated area with reserved space
+    const bannerContainer = document.getElementById('banner-container');
+    if (bannerContainer) {
+      bannerContainer.innerHTML = bannerHTML;
+    }
+    ```
+  </Accordion>
+
+  <Accordion icon="rectangle-ad" title="Reserve space for ads">
+    Ads are common CLS culprits:
+    
+    ```html
+    <!-- Reserve exact ad slot size -->
+    <div class="ad-container" style="width: 728px; height: 90px;">
+      <!-- Ad loads here -->
+    </div>
+    
+    <!-- Or use aspect ratio for responsive -->
+    <div class="ad-container" style="aspect-ratio: 728/90; width: 100%; max-width: 728px;">
+      <!-- Ad loads here -->
+    </div>
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Additional Performance Metrics
+
+### Time to First Byte (TTFB)
+
+How quickly your server responds:
+
+**Target**: ✅ Good: ≤ 800ms | ❌ Poor: > 1800ms
+
+**Improvements:**
+- Use a CDN
+- Enable server caching
+- Optimize database queries
+- Use faster hosting
+- Enable HTTP/2 or HTTP/3
+
+```nginx
+# Nginx HTTP/2 configuration
+server {
+    listen 443 ssl http2;
+    ssl_protocols TLSv1.2 TLSv1.3;
+}
+```
+
+### Total Blocking Time (TBT)
+
+Time when the main thread is blocked:
+
+**Target**: ✅ Good: ≤ 200ms | ❌ Poor: > 600ms
+
+**Improvements:**
+- Minimize JavaScript
+- Code splitting
+- Defer non-critical scripts
+- Use web workers
+
+### Speed Index
+
+How quickly content is visually displayed:
+
+**Target**: ✅ Good: ≤ 3.4s | ❌ Poor: > 5.8s
+
+**Improvements:**
+- Optimize critical rendering path
+- Lazy load below-the-fold content
+- Use progressive image loading
+
+## Performance Optimization Checklist
+
+<Steps>
+  <Step title="LCP Optimization">
+    - ✅ Compress and optimize images
+    - ✅ Use modern image formats (WebP, AVIF)
+    - ✅ Enable CDN
+    - ✅ Defer non-critical CSS/JS
+    - ✅ Optimize server response time
+  </Step>
+  
+  <Step title="FID Optimization">
+    - ✅ Minimize JavaScript execution
+    - ✅ Break up long tasks
+    - ✅ Use code splitting
+    - ✅ Remove unused third-party code
+    - ✅ Use web workers for heavy tasks
+  </Step>
+  
+  <Step title="CLS Optimization">
+    - ✅ Add width/height to all images
+    - ✅ Reserve space for ads/embeds
+    - ✅ Use font-display: swap
+    - ✅ Avoid inserting content above existing content
+    - ✅ Use skeleton screens for loading states
+  </Step>
+</Steps>
+
+## Testing Core Web Vitals
+
+<CardGroup cols={2}>
+  <Card title="Google PageSpeed Insights" icon="google">
+    Test any URL and get specific recommendations
+    [pagespeed.web.dev](https://pagespeed.web.dev/)
+  </Card>
+  
+  <Card title="Chrome DevTools" icon="chrome">
+    Use Lighthouse in Chrome DevTools for detailed analysis
+  </Card>
+  
+  <Card title="Search Console" icon="chart-line">
+    View real-user Core Web Vitals data in Google Search Console
+  </Card>
+  
+  <Card title="WebPageTest" icon="stopwatch">
+    Advanced testing with detailed waterfall charts
+    [webpagetest.org](https://webpagetest.org/)
+  </Card>
+</CardGroup>
+
+## Real User Monitoring (RUM)
+
+Track Core Web Vitals from real users:
+
+```javascript
+// Using web-vitals library
+import {onCLS, onFID, onLCP} from 'web-vitals';
+
+function sendToAnalytics({name, value, id}) {
+  // Send to your analytics
+  fetch('/analytics', {
+    method: 'POST',
+    body: JSON.stringify({
+      metric: name,
+      value: value,
+      id: id
+    })
+  });
+}
+
+onCLS(sendToAnalytics);
+onFID(sendToAnalytics);
+onLCP(sendToAnalytics);
+```
+
+## Performance Budget
+
+Set performance budgets to maintain good metrics:
+
+```json
+{
+  "budget": [
+    {
+      "resourceSizes": [
+        { "resourceType": "script", "budget": 300 },
+        { "resourceType": "image", "budget": 500 },
+        { "resourceType": "stylesheet", "budget": 100 },
+        { "resourceType": "document", "budget": 50 },
+        { "resourceType": "total", "budget": 1000 }
+      ],
+      "timings": [
+        { "metric": "interactive", "budget": 3000 },
+        { "metric": "first-contentful-paint", "budget": 1500 }
+      ]
+    }
+  ]
+}
+```
+
+## Common Optimization Priorities
+
+### 🔴 High Priority - LCP Improvements
+
+<CardGroup cols={2}>
+  <Card title="Optimize Images" icon="image">
+    Convert to WebP, compress, add dimensions
+    **Typical Impact**: -1.0s to -1.5s
+  </Card>
+  
+  <Card title="Enable CDN" icon="cloud">
+    Use Cloudflare or similar CDN service
+    **Typical Impact**: -0.3s to -0.8s
+  </Card>
+  
+  <Card title="Defer JavaScript" icon="code">
+    Load non-critical JS after main content
+    **Typical Impact**: -0.2s to -0.5s
+  </Card>
+  
+  <Card title="Optimize Server" icon="server">
+    Improve hosting, enable caching
+    **Typical Impact**: -0.2s to -0.4s
+  </Card>
+</CardGroup>
+
+### 🟡 Medium Priority - CLS Improvements
+
+<CardGroup cols={2}>
+  <Card title="Add Image Dimensions" icon="ruler">
+    Specify width/height on all images
+    **Typical Impact**: -0.05 to -0.08
+  </Card>
+  
+  <Card title="Reserve Ad Space" icon="rectangle-ad">
+    Pre-allocate space for dynamic content
+    **Typical Impact**: -0.03 to -0.06
+  </Card>
+  
+  <Card title="Font Loading" icon="font">
+    Use font-display: swap
+    **Typical Impact**: -0.01 to -0.03
+  </Card>
+</CardGroup>
+
+### ✅ Maintaining Good FID
+
+Keep FID scores low by:
+- Minimizing JavaScript execution
+- Using code splitting
+- Loading third-party scripts asynchronously
+- Utilizing web workers for heavy tasks
+
+## Tools and Resources
+
+### Performance Analysis
+
+```bash
+# Lighthouse CLI
+npm install -g lighthouse
+lighthouse https://asklantern.com --view
+
+# Web Vitals CLI
+npm install -g web-vitals-cli
+web-vitals https://asklantern.com
+```
+
+### Image Optimization Tools
+
+- **ImageOptim** (Mac) - Desktop image optimizer
+- **Squoosh** - Web-based image compressor
+- **Sharp** (Node.js) - Automated image processing
+- **Cloudinary/Imgix** - Image CDN with automatic optimization
+
+### Monitoring Services
+
+- **Google Search Console** - Free real-user Core Web Vitals data
+- **Cloudflare Analytics** - Free with Cloudflare CDN
+- **Vercel Analytics** - For Next.js/Vercel deployments
+- **New Relic/Datadog** - Enterprise monitoring
+
+## Impact on AI Search
+
+<Info>
+  **Why performance matters for AI:**
+  - 🤖 AI crawlers prioritize fast, accessible sites
+  - 📊 Better UX signals = higher trust scores
+  - ⚡ Faster sites get crawled more frequently
+  - 🎯 Performance is a ranking factor for citations
+  - 💰 Better conversion from AI-driven traffic
+</Info>
+
+## Monitor with Lantern
+
+Track how performance improvements affect your AI search visibility:
+
+- 📈 Correlation between Core Web Vitals and AI citations
+- 🔍 Compare performance vs. competitors
+- ⏱️ Track performance trends over time
+- 🎯 Get alerts for performance regressions
+
+<Warning>
+  **Regular monitoring is key**: Core Web Vitals should be checked weekly. Set up automated monitoring to catch regressions early.
+</Warning>
+
+## Next Steps
+
+<Card title="Back to Technical Optimization" icon="arrow-left" href="/technical/security">
+  Review all technical optimization guides
+</Card>

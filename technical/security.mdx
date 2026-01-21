@@ -1,0 +1,434 @@
+---
+title: "Security Best Practices"
+description: "Secure your site while maintaining AI search visibility"
+---
+
+## Balancing Security and AI Accessibility
+
+The challenge: Keep your site secure from threats while ensuring AI platforms can access and index your content. Here's how to achieve both.
+
+<Info>
+  **Key Principle**: Security and AI visibility aren't mutually exclusive. Proper configuration allows both.
+</Info>
+
+## Security Headers for AI-Friendly Sites
+
+### 1. Content Security Policy (CSP)
+
+Protect against XSS attacks while allowing AI crawlers:
+
+```html
+<meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self'; 
+               script-src 'self' 'unsafe-inline'; 
+               style-src 'self' 'unsafe-inline'; 
+               img-src 'self' data: https:;">
+```
+
+Or via HTTP header:
+
+```
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'
+```
+
+<Tip>
+  CSP headers don't affect crawler access - they only control browser behavior.
+</Tip>
+
+### 2. CORS (Cross-Origin Resource Sharing)
+
+Allow AI platforms to access your content:
+
+```javascript
+// Node.js/Express example
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+```
+
+For static content, configure your server:
+
+```nginx
+# Nginx
+location / {
+    add_header Access-Control-Allow-Origin *;
+}
+```
+
+### 3. X-Frame-Options
+
+Prevent clickjacking while keeping content accessible:
+
+```
+X-Frame-Options: SAMEORIGIN
+```
+
+Or:
+
+```html
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+```
+
+### 4. X-Content-Type-Options
+
+Prevent MIME type sniffing:
+
+```
+X-Content-Type-Options: nosniff
+```
+
+## Rate Limiting for AI Crawlers
+
+Balance protecting your server while allowing AI crawler access:
+
+```javascript
+// Express rate limiting
+const rateLimit = require('express-rate-limit');
+
+// General rate limit
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
+// Generous limits for known AI crawlers
+const botLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 1000, // More generous for bots
+  skip: (req) => {
+    const userAgent = req.get('User-Agent') || '';
+    return /GPTBot|Claude-Web|PerplexityBot|Google-Extended/i.test(userAgent);
+  }
+});
+
+app.use('/api/', generalLimiter);
+```
+
+## Authentication Strategy
+
+Protect sensitive areas while keeping public content accessible:
+
+<AccordionGroup>
+  <Accordion icon="unlock" title="Public content">
+    Keep these accessible to AI crawlers:
+    - Homepage
+    - Product pages
+    - Blog posts
+    - Documentation
+    - Pricing pages
+    - About/Contact pages
+  </Accordion>
+
+  <Accordion icon="lock" title="Protected content">
+    Require authentication for:
+    - User dashboards
+    - Admin panels
+    - API endpoints (except public ones)
+    - User data and profiles
+    - Payment information
+    - Internal tools
+  </Accordion>
+
+  <Accordion icon="shield" title="Implementation">
+    ```javascript
+    // Middleware to allow public paths
+    const publicPaths = [
+      '/',
+      '/blog',
+      '/products',
+      '/docs',
+      '/pricing',
+      '/about'
+    ];
+    
+    const requireAuth = (req, res, next) => {
+      const isPublic = publicPaths.some(path => 
+        req.path.startsWith(path)
+      );
+      
+      if (isPublic) {
+        return next();
+      }
+      
+      // Check authentication for protected routes
+      if (!req.user) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      
+      next();
+    };
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## HTTPS and SSL/TLS
+
+Always use HTTPS for security and SEO:
+
+<Steps>
+  <Step title="Get SSL certificate">
+    Use Let's Encrypt for free SSL certificates or purchase from a CA
+  </Step>
+  
+  <Step title="Configure server">
+    Enable HTTPS on your server (nginx, Apache, etc.)
+  </Step>
+  
+  <Step title="Force HTTPS">
+    Redirect all HTTP traffic to HTTPS
+    
+    ```nginx
+    server {
+        listen 80;
+        server_name asklantern.com;
+        return 301 https://$server_name$request_uri;
+    }
+    ```
+  </Step>
+  
+  <Step title="Update internal links">
+    Ensure all internal links use HTTPS
+  </Step>
+</Steps>
+
+<Info>
+  AI platforms prefer HTTPS sites - it's a trust signal for content quality.
+</Info>
+
+## robots.txt Security Considerations
+
+Prevent access to sensitive paths:
+
+```txt
+# Block sensitive directories
+User-agent: *
+Disallow: /admin/
+Disallow: /api/private/
+Disallow: /.env
+Disallow: /config/
+Disallow: /backup/
+Disallow: /database/
+
+# Allow AI crawlers to public content
+User-agent: GPTBot
+User-agent: Claude-Web
+User-agent: PerplexityBot
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/private/
+
+# Reference security policy
+# Security: https://asklantern.com/security.txt
+```
+
+## security.txt File
+
+Create a security.txt file at `/.well-known/security.txt`:
+
+```txt
+Contact: security@asklantern.com
+Expires: 2026-12-31T23:59:59.000Z
+Encryption: https://asklantern.com/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://asklantern.com/.well-known/security.txt
+Policy: https://asklantern.com/security-policy
+```
+
+This helps security researchers report vulnerabilities responsibly.
+
+## API Security for AI Access
+
+Secure your API while allowing AI platforms:
+
+```javascript
+// API key validation
+const validateApiKey = (req, res, next) => {
+  const apiKey = req.headers['x-api-key'];
+  
+  // Check for valid API key
+  if (!apiKey || !isValidApiKey(apiKey)) {
+    return res.status(401).json({ 
+      error: 'Invalid or missing API key' 
+    });
+  }
+  
+  next();
+};
+
+// Public endpoints (no auth required)
+app.get('/api/public/stats', (req, res) => {
+  res.json({ stats: getPublicStats() });
+});
+
+// Protected endpoints
+app.get('/api/private/data', validateApiKey, (req, res) => {
+  res.json({ data: getPrivateData() });
+});
+```
+
+## DDoS Protection
+
+Protect against attacks while allowing legitimate AI crawlers:
+
+<CardGroup cols={2}>
+  <Card title="Use CDN" icon="cloud">
+    Services like Cloudflare provide DDoS protection and bot management
+  </Card>
+  
+  <Card title="Rate Limiting" icon="gauge">
+    Implement per-IP rate limits with exceptions for known good bots
+  </Card>
+  
+  <Card title="Bot Detection" icon="robot">
+    Use services to identify and block malicious bots while allowing AI crawlers
+  </Card>
+  
+  <Card title="Monitor Traffic" icon="chart-line">
+    Track unusual traffic patterns in your Lantern dashboard
+  </Card>
+</CardGroup>
+
+## Cloudflare Configuration
+
+If using Cloudflare, configure bot protection:
+
+1. **Security Level**: Set to "Medium" (not "I'm Under Attack")
+2. **Bot Fight Mode**: Enable with exceptions for known AI bots
+3. **Rate Limiting**: Configure rules that exclude verified bots
+4. **Firewall Rules**: Allow specific user agents:
+
+```
+(http.user_agent contains "GPTBot" or 
+ http.user_agent contains "Claude-Web" or 
+ http.user_agent contains "PerplexityBot" or 
+ http.user_agent contains "Google-Extended") 
+and not (cf.threat_score > 30)
+```
+
+## Data Privacy Compliance
+
+Ensure compliance while maintaining AI visibility:
+
+<AccordionGroup>
+  <Accordion icon="file-contract" title="GDPR Compliance">
+    - Only expose public information to AI crawlers
+    - Don't include personal data in public pages
+    - Implement cookie consent if tracking users
+    - Provide privacy policy accessible to AI
+  </Accordion>
+
+  <Accordion icon="shield-check" title="CCPA Compliance">
+    - Disclose data collection practices
+    - Provide opt-out mechanisms
+    - Don't sell personal information
+    - Make privacy policy accessible
+  </Accordion>
+
+  <Accordion icon="globe" title="International Compliance">
+    - Follow local data protection laws
+    - Implement geo-blocking if needed
+    - Provide localized privacy notices
+  </Accordion>
+</AccordionGroup>
+
+## Monitoring and Logging
+
+Track security and bot activity:
+
+```javascript
+// Log AI crawler access
+const logBotAccess = (req, res, next) => {
+  const userAgent = req.get('User-Agent') || '';
+  
+  if (/GPTBot|Claude-Web|PerplexityBot|Google-Extended/i.test(userAgent)) {
+    console.log({
+      timestamp: new Date(),
+      bot: userAgent,
+      path: req.path,
+      ip: req.ip
+    });
+  }
+  
+  next();
+};
+
+app.use(logBotAccess);
+```
+
+<Tip>
+  Use Lantern to monitor which AI platforms are accessing your site and track any unusual patterns.
+</Tip>
+
+## Security Checklist
+
+<Steps>
+  <Step title="Enable HTTPS">
+    ✅ SSL certificate installed and configured
+  </Step>
+  
+  <Step title="Configure headers">
+    ✅ CSP, CORS, X-Frame-Options properly set
+  </Step>
+  
+  <Step title="Update robots.txt">
+    ✅ Block sensitive paths, allow AI crawlers to public content
+  </Step>
+  
+  <Step title="Implement rate limiting">
+    ✅ Protect against abuse, allow legitimate crawlers
+  </Step>
+  
+  <Step title="Add security.txt">
+    ✅ Provide security contact information
+  </Step>
+  
+  <Step title="Monitor access">
+    ✅ Track AI crawler activity in Lantern dashboard
+  </Step>
+  
+  <Step title="Regular audits">
+    ✅ Review security configurations quarterly
+  </Step>
+</Steps>
+
+## Common Security Mistakes
+
+<Warning>
+  **Don't do these:**
+  - ❌ Blocking all bots with aggressive security
+  - ❌ Using "I'm Under Attack" mode permanently
+  - ❌ Requiring login for all pages
+  - ❌ Blocking AI crawlers by mistake
+  - ❌ Exposing sensitive data in public pages
+  - ❌ Ignoring HTTPS
+</Warning>
+
+## Testing Your Security
+
+<CardGroup cols={2}>
+  <Card title="SSL Test" icon="lock">
+    Use [SSL Labs](https://www.ssllabs.com/ssltest/) to test SSL configuration
+  </Card>
+  
+  <Card title="Security Headers" icon="shield">
+    Check headers with [Security Headers](https://securityheaders.com/)
+  </Card>
+  
+  <Card title="Bot Access" icon="robot">
+    Verify AI crawlers can access public content
+  </Card>
+  
+  <Card title="Lantern Monitoring" icon="chart-line">
+    Monitor crawler activity in your dashboard
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<Card title="View all technical guides" icon="book" href="/development">
+  Return to the technical optimization overview
+</Card>

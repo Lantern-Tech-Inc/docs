@@ -1,0 +1,168 @@
+---
+title: "Robots.txt Optimization"
+description: "Configure your robots.txt file for AI crawlers and search engines"
+---
+
+## What is robots.txt?
+
+The `robots.txt` file tells search engines and AI crawlers which parts of your site they can access and index. Optimizing this file is crucial for AI search visibility.
+
+## Why It Matters for AI Search
+
+AI platforms like ChatGPT, Perplexity, and Claude use web crawlers to discover and index content. A properly configured `robots.txt` ensures:
+
+- ✅ AI crawlers can access your important content
+- ✅ You control what gets indexed
+- ✅ You prevent crawling of sensitive or duplicate content
+- ✅ You optimize crawl budget for high-value pages
+
+## AI Crawler User Agents
+
+Here are the main AI crawler user agents you should allow:
+
+```txt
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: Claude-Web
+Allow: /
+
+# Google (Gemini/Bard)
+User-agent: Google-Extended
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Common Good Crawlers (AI training data)
+User-agent: CCBot
+Allow: /
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion icon="check" title="Allow AI crawlers to important content">
+    Ensure AI bots can access your key pages:
+    
+    ```txt
+    User-agent: GPTBot
+    Allow: /blog/
+    Allow: /products/
+    Allow: /docs/
+    Disallow: /admin/
+    ```
+  </Accordion>
+
+  <Accordion icon="shield" title="Block sensitive areas">
+    Prevent AI from indexing private or duplicate content:
+    
+    ```txt
+    User-agent: *
+    Disallow: /admin/
+    Disallow: /private/
+    Disallow: /api/
+    Disallow: /*?
+    ```
+  </Accordion>
+
+  <Accordion icon="clock" title="Include your sitemap">
+    Help crawlers find all your content:
+    
+    ```txt
+    Sitemap: https://asklantern.com/sitemap.xml
+    ```
+  </Accordion>
+
+  <Accordion icon="bolt" title="Optimize crawl budget">
+    Direct crawlers to your most important pages first:
+    
+    ```txt
+    # High priority content
+    User-agent: *
+    Allow: /blog/
+    Allow: /products/
+    
+    # Lower priority
+    Crawl-delay: 10
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Example robots.txt for AI Search
+
+Here's a complete example optimized for AI search visibility:
+
+```txt
+# Allow all major AI crawlers
+User-agent: GPTBot
+User-agent: Claude-Web
+User-agent: Google-Extended
+User-agent: PerplexityBot
+User-agent: CCBot
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# General crawlers
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+Disallow: /*?filter=
+Disallow: /*?utm_
+
+# Sitemaps
+Sitemap: https://asklantern.com/sitemap.xml
+Sitemap: https://asklantern.com/blog-sitemap.xml
+```
+
+## Testing Your robots.txt
+
+<Steps>
+  <Step title="Check syntax">
+    Use Google's [robots.txt Tester](https://support.google.com/webmasters/answer/6062598) to validate syntax
+  </Step>
+  
+  <Step title="Test with Lantern">
+    Use Lantern's crawler audit tool to see how AI bots interpret your robots.txt
+  </Step>
+  
+  <Step title="Monitor in dashboard">
+    Track which AI crawlers are accessing your site in your Lantern dashboard
+  </Step>
+</Steps>
+
+<Warning>
+  **Important**: Changes to robots.txt can take days or weeks to fully propagate. Monitor your Lantern dashboard to see when AI platforms recognize the changes.
+</Warning>
+
+## Common Mistakes to Avoid
+
+<CardGroup cols={2}>
+  <Card title="Blocking AI crawlers" icon="ban">
+    Don't accidentally block AI bots with overly restrictive rules
+  </Card>
+  
+  <Card title="No sitemap reference" icon="map">
+    Always include your sitemap URL to help crawlers discover content
+  </Card>
+  
+  <Card title="Blocking important pages" icon="exclamation">
+    Ensure your best content is accessible to AI crawlers
+  </Card>
+  
+  <Card title="Syntax errors" icon="code">
+    Test your robots.txt file - syntax errors can block all crawlers
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<Card title="Configure your sitemap" icon="map" href="/technical/sitemap">
+  Learn how to create an optimized sitemap for AI discovery
+</Card>

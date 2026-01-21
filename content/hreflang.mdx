@@ -1,0 +1,484 @@
+---
+title: "Hreflang Tags for International SEO"
+description: "Implement hreflang tags to help AI and search engines serve the right language version"
+---
+
+## What is Hreflang?
+
+Hreflang is an HTML attribute that tells search engines and AI platforms which language and regional version of a page to show users. It's essential for international websites and multilingual content.
+
+<Info>
+  **Why it matters for AI**: AI platforms like ChatGPT and Perplexity use hreflang to serve the correct language version when answering queries in different languages.
+</Info>
+
+## Basic Hreflang Syntax
+
+```html
+<link rel="alternate" hreflang="en" href="https://asklantern.com">
+<link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+<link rel="alternate" hreflang="fr" href="https://asklantern.com/fr">
+<link rel="alternate" hreflang="x-default" href="https://asklantern.com">
+```
+
+### Components:
+- **rel="alternate"**: Indicates an alternative version
+- **hreflang**: Language (and optionally region) code
+- **href**: Full URL to that version
+
+## Language Codes
+
+Use ISO 639-1 language codes:
+
+```html
+<!-- Common languages -->
+<link rel="alternate" hreflang="en" href="https://asklantern.com">       <!-- English -->
+<link rel="alternate" hreflang="es" href="https://asklantern.com/es">   <!-- Spanish -->
+<link rel="alternate" hreflang="fr" href="https://asklantern.com/fr">   <!-- French -->
+<link rel="alternate" hreflang="de" href="https://asklantern.com/de">   <!-- German -->
+<link rel="alternate" hreflang="pt" href="https://asklantern.com/pt">   <!-- Portuguese -->
+<link rel="alternate" hreflang="it" href="https://asklantern.com/it">   <!-- Italian -->
+<link rel="alternate" hreflang="ja" href="https://asklantern.com/ja">   <!-- Japanese -->
+<link rel="alternate" hreflang="zh" href="https://asklantern.com/zh">   <!-- Chinese -->
+<link rel="alternate" hreflang="ko" href="https://asklantern.com/ko">   <!-- Korean -->
+<link rel="alternate" hreflang="ar" href="https://asklantern.com/ar">   <!-- Arabic -->
+```
+
+## Regional Targeting
+
+Combine language with region using ISO 3166-1 Alpha 2 country codes:
+
+```html
+<!-- English variants -->
+<link rel="alternate" hreflang="en-US" href="https://asklantern.com">        <!-- US English -->
+<link rel="alternate" hreflang="en-GB" href="https://asklantern.com/uk">     <!-- UK English -->
+<link rel="alternate" hreflang="en-AU" href="https://asklantern.com/au">     <!-- Australian English -->
+<link rel="alternate" hreflang="en-CA" href="https://asklantern.com/ca">     <!-- Canadian English -->
+
+<!-- Spanish variants -->
+<link rel="alternate" hreflang="es-ES" href="https://asklantern.com/es">     <!-- Spain Spanish -->
+<link rel="alternate" hreflang="es-MX" href="https://asklantern.com/es-mx">  <!-- Mexico Spanish -->
+<link rel="alternate" hreflang="es-AR" href="https://asklantern.com/es-ar">  <!-- Argentina Spanish -->
+
+<!-- Portuguese variants -->
+<link rel="alternate" hreflang="pt-BR" href="https://asklantern.com/pt-br">  <!-- Brazilian Portuguese -->
+<link rel="alternate" hreflang="pt-PT" href="https://asklantern.com/pt-pt">  <!-- Portugal Portuguese -->
+
+<!-- French variants -->
+<link rel="alternate" hreflang="fr-FR" href="https://asklantern.com/fr">     <!-- France French -->
+<link rel="alternate" hreflang="fr-CA" href="https://asklantern.com/fr-ca">  <!-- Canadian French -->
+
+<!-- Chinese variants -->
+<link rel="alternate" hreflang="zh-CN" href="https://asklantern.com/zh-cn">  <!-- Simplified Chinese -->
+<link rel="alternate" hreflang="zh-TW" href="https://asklantern.com/zh-tw">  <!-- Traditional Chinese -->
+```
+
+## The x-default Tag
+
+Always include an `x-default` tag as a fallback:
+
+```html
+<link rel="alternate" hreflang="x-default" href="https://asklantern.com">
+```
+
+This tells AI/search engines which version to show when:
+- User's language isn't available
+- Language can't be determined
+- Default landing page for international visitors
+
+## Implementation Methods
+
+### 1. HTML Link Tags (Recommended)
+
+Add to the `<head>` section of each page:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lantern - AI Search Analytics</title>
+  
+  <!-- Hreflang tags -->
+  <link rel="alternate" hreflang="en" href="https://asklantern.com">
+  <link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+  <link rel="alternate" hreflang="fr" href="https://asklantern.com/fr">
+  <link rel="alternate" hreflang="de" href="https://asklantern.com/de">
+  <link rel="alternate" hreflang="x-default" href="https://asklantern.com">
+</head>
+<body>
+  <!-- Content -->
+</body>
+</html>
+```
+
+### 2. HTTP Headers
+
+Alternative method via HTTP headers:
+
+```http
+Link: <https://asklantern.com>; rel="alternate"; hreflang="en",
+      <https://asklantern.com/es>; rel="alternate"; hreflang="es",
+      <https://asklantern.com/fr>; rel="alternate"; hreflang="fr",
+      <https://asklantern.com>; rel="alternate"; hreflang="x-default"
+```
+
+### 3. XML Sitemap
+
+Include in your sitemap.xml:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://asklantern.com</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://asklantern.com"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://asklantern.com/es"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://asklantern.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://asklantern.com"/>
+  </url>
+  
+  <url>
+    <loc>https://asklantern.com/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://asklantern.com"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://asklantern.com/es"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://asklantern.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://asklantern.com"/>
+  </url>
+  
+</urlset>
+```
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion icon="repeat" title="Bidirectional linking">
+    All language versions must reference each other:
+    
+    ```html
+    <!-- On EN page -->
+    <link rel="alternate" hreflang="en" href="https://asklantern.com">
+    <link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+    
+    <!-- On ES page -->
+    <link rel="alternate" hreflang="en" href="https://asklantern.com">
+    <link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+    ```
+  </Accordion>
+
+  <Accordion icon="link" title="Use absolute URLs">
+    Always use full URLs, not relative paths:
+    
+    ```html
+    <!-- Good -->
+    <link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+    
+    <!-- Bad -->
+    <link rel="alternate" hreflang="es" href="/es">
+    ```
+  </Accordion>
+
+  <Accordion icon="globe" title="Self-reference pages">
+    Each page should include a link to itself:
+    
+    ```html
+    <!-- On the English page -->
+    <link rel="alternate" hreflang="en" href="https://asklantern.com">
+    <link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+    ```
+  </Accordion>
+
+  <Accordion icon="check" title="Use valid codes">
+    Only use valid ISO 639-1 and ISO 3166-1 codes:
+    
+    ```html
+    <!-- Good -->
+    <link rel="alternate" hreflang="en-US" href="https://asklantern.com">
+    
+    <!-- Bad: Invalid code -->
+    <link rel="alternate" hreflang="english" href="https://asklantern.com">
+    ```
+  </Accordion>
+
+  <Accordion icon="star" title="Always include x-default">
+    Provide a default fallback version:
+    
+    ```html
+    <link rel="alternate" hreflang="x-default" href="https://asklantern.com">
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Common URL Structures
+
+### Subdirectories (Recommended)
+
+```html
+<link rel="alternate" hreflang="en" href="https://asklantern.com">
+<link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+<link rel="alternate" hreflang="fr" href="https://asklantern.com/fr">
+```
+
+**Pros**: Easy to manage, good for SEO, clear structure
+**Cons**: Requires content organization
+
+### Subdomains
+
+```html
+<link rel="alternate" hreflang="en" href="https://asklantern.com">
+<link rel="alternate" hreflang="es" href="https://es.asklantern.com">
+<link rel="alternate" hreflang="fr" href="https://fr.asklantern.com">
+```
+
+**Pros**: Clear separation, can use different servers
+**Cons**: Harder to manage, separate analytics
+
+### Separate Domains (ccTLDs)
+
+```html
+<link rel="alternate" hreflang="en-US" href="https://asklantern.com">
+<link rel="alternate" hreflang="en-GB" href="https://asklantern.co.uk">
+<link rel="alternate" hreflang="es-ES" href="https://asklantern.es">
+<link rel="alternate" hreflang="fr-FR" href="https://asklantern.fr">
+```
+
+**Pros**: Strong local signal, trust from users
+**Cons**: Expensive, complex management
+
+### Parameters (Not Recommended)
+
+```html
+<!-- Avoid this approach -->
+<link rel="alternate" hreflang="es" href="https://asklantern.com?lang=es">
+```
+
+**Why avoid**: Parameters can be ignored, less clear for AI
+
+## Complete Multi-Language Setup
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Page title and meta -->
+  <title>Lantern - AI Search Analytics Platform</title>
+  <meta name="description" content="Track your brand visibility across AI platforms">
+  
+  <!-- Hreflang tags for all language versions -->
+  <link rel="alternate" hreflang="en" href="https://asklantern.com">
+  <link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+  <link rel="alternate" hreflang="fr" href="https://asklantern.com/fr">
+  <link rel="alternate" hreflang="de" href="https://asklantern.com/de">
+  <link rel="alternate" hreflang="pt-BR" href="https://asklantern.com/pt-br">
+  <link rel="alternate" hreflang="ja" href="https://asklantern.com/ja">
+  <link rel="alternate" hreflang="zh-CN" href="https://asklantern.com/zh-cn">
+  
+  <!-- Regional variants -->
+  <link rel="alternate" hreflang="en-US" href="https://asklantern.com">
+  <link rel="alternate" hreflang="en-GB" href="https://asklantern.com/uk">
+  <link rel="alternate" hreflang="en-AU" href="https://asklantern.com/au">
+  
+  <!-- Default fallback -->
+  <link rel="alternate" hreflang="x-default" href="https://asklantern.com">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://asklantern.com">
+</head>
+<body>
+  <!-- Content -->
+</body>
+</html>
+```
+
+## Hreflang for Different Page Types
+
+### Homepage
+
+```html
+<link rel="alternate" hreflang="en" href="https://asklantern.com">
+<link rel="alternate" hreflang="es" href="https://asklantern.com/es">
+<link rel="alternate" hreflang="fr" href="https://asklantern.com/fr">
+<link rel="alternate" hreflang="x-default" href="https://asklantern.com">
+```
+
+### Product Pages
+
+```html
+<link rel="alternate" hreflang="en" href="https://asklantern.com/products/analytics">
+<link rel="alternate" hreflang="es" href="https://asklantern.com/es/productos/analiticas">
+<link rel="alternate" hreflang="fr" href="https://asklantern.com/fr/produits/analytique">
+<link rel="alternate" hreflang="x-default" href="https://asklantern.com/products/analytics">
+```
+
+### Blog Posts
+
+```html
+<link rel="alternate" hreflang="en" href="https://asklantern.com/blog/ai-search-guide">
+<link rel="alternate" hreflang="es" href="https://asklantern.com/es/blog/guia-busqueda-ia">
+<link rel="alternate" hreflang="fr" href="https://asklantern.com/fr/blog/guide-recherche-ia">
+<link rel="alternate" hreflang="x-default" href="https://asklantern.com/blog/ai-search-guide">
+```
+
+## Common Errors and Fixes
+
+<CardGroup cols={2}>
+  <Card title="Missing return tags" icon="arrows-left-right">
+    **Error**: Spanish page doesn't link back to English
+    **Fix**: Add all hreflang tags to all versions
+  </Card>
+  
+  <Card title="No self-reference" icon="arrow-rotate-right">
+    **Error**: Page doesn't include link to itself
+    **Fix**: Add self-referential hreflang tag
+  </Card>
+  
+  <Card title="Wrong URL" icon="link-slash">
+    **Error**: Relative URLs or broken links
+    **Fix**: Use absolute URLs and verify they work
+  </Card>
+  
+  <Card title="Missing x-default" icon="globe">
+    **Error**: No fallback version specified
+    **Fix**: Add x-default pointing to primary version
+  </Card>
+  
+  <Card title="Invalid codes" icon="ban">
+    **Error**: Using made-up language codes
+    **Fix**: Use valid ISO codes only
+  </Card>
+  
+  <Card title="Mixed with canonical" icon="exclamation">
+    **Error**: Conflicting canonical and hreflang
+    **Fix**: Canonical should match current page
+  </Card>
+</CardGroup>
+
+## Testing Hreflang Implementation
+
+<Steps>
+  <Step title="Google Search Console">
+    Check for hreflang errors in International Targeting report
+  </Step>
+  
+  <Step title="Hreflang Validator">
+    Use tools like [hreflang.org](https://www.hreflang.org/) to validate
+  </Step>
+  
+  <Step title="View page source">
+    Manually verify tags are present in HTML
+  </Step>
+  
+  <Step title="Check all pages">
+    Ensure consistency across all language versions
+  </Step>
+  
+  <Step title="Monitor with Lantern">
+    Track how AI platforms handle your language versions
+  </Step>
+</Steps>
+
+## Dynamic Hreflang Implementation
+
+### JavaScript/Node.js
+
+```javascript
+const languages = ['en', 'es', 'fr', 'de', 'pt-BR'];
+const baseUrl = 'https://asklantern.com';
+const currentPath = '/products/analytics';
+
+function generateHreflang(lang, path) {
+  const langPath = lang === 'en' ? '' : `/${lang}`;
+  return `<link rel="alternate" hreflang="${lang}" href="${baseUrl}${langPath}${path}">`;
+}
+
+// Generate all hreflang tags
+languages.forEach(lang => {
+  console.log(generateHreflang(lang, currentPath));
+});
+
+// Add x-default
+console.log(`<link rel="alternate" hreflang="x-default" href="${baseUrl}${currentPath}">`);
+```
+
+### React/Next.js
+
+```jsx
+import Head from 'next/head';
+
+export default function Page({ languages, currentPath }) {
+  return (
+    <Head>
+      {languages.map(lang => (
+        <link
+          key={lang}
+          rel="alternate"
+          hreflang={lang}
+          href={`https://asklantern.com${lang === 'en' ? '' : `/${lang}`}${currentPath}`}
+        />
+      ))}
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={`https://asklantern.com${currentPath}`}
+      />
+    </Head>
+  );
+}
+```
+
+## Hreflang Checklist
+
+<Steps>
+  <Step title="All versions linked">
+    ✅ Every language version references all others
+  </Step>
+  
+  <Step title="Self-referential">
+    ✅ Each page includes link to itself
+  </Step>
+  
+  <Step title="Absolute URLs">
+    ✅ All URLs are complete (https://...)
+  </Step>
+  
+  <Step title="Valid codes">
+    ✅ Using correct ISO language/country codes
+  </Step>
+  
+  <Step title="x-default included">
+    ✅ Default fallback version specified
+  </Step>
+  
+  <Step title="Bidirectional">
+    ✅ Links go both ways between versions
+  </Step>
+  
+  <Step title="Consistent">
+    ✅ Same structure on all language pages
+  </Step>
+</Steps>
+
+<Warning>
+  **Important**: Hreflang doesn't translate your content - it only tells AI/search engines which version to show. You still need actual translated content.
+</Warning>
+
+## Impact on AI Search
+
+<Info>
+  When properly implemented, hreflang helps AI platforms:
+  - 🌍 Serve the right language to users
+  - 📍 Understand regional targeting
+  - 🔍 Avoid duplicate content issues
+  - ✅ Index all language versions correctly
+  - 💬 Cite the appropriate language version in responses
+</Info>
+
+## Next Steps
+
+<Card title="Back to Content Structure" icon="arrow-left" href="/content/structured-data">
+  Review the complete content optimization guide
+</Card>
