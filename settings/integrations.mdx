@@ -1,0 +1,124 @@
+---
+title: "Integrations"
+description: "Connect your tools to unlock the full power of Lantern agents."
+---
+
+Integrations are configured at **Settings → Integrations**. Each connection unlocks specific agent tools and data in the analytics pages.
+
+---
+
+## Google Search Console
+
+Pulls keyword impressions, clicks, CTR, and ranking positions into Lantern's SEO pages.
+
+<Steps>
+  <Step title="Click Connect Google Search Console">
+    Sign in with your Google account and grant read access.
+  </Step>
+  <Step title="Select your property">
+    Choose the website property to connect. Data appears in SEO → Search Console within a few minutes.
+  </Step>
+</Steps>
+
+**What unlocks:** Live keyword data in Visibility and SEO pages; agents can pull fresh GSC data mid-run.
+
+---
+
+## Google Analytics (GA4)
+
+Pulls session counts, traffic sources, and AI referral data from your GA4 property.
+
+<Steps>
+  <Step title="Click Connect Google Analytics">
+    Sign in with Google and grant read access.
+  </Step>
+  <Step title="Select your GA4 property ID">
+    Data appears on the Traffic page once connected.
+  </Step>
+</Steps>
+
+**What unlocks:** Full traffic view including session trends, AI referral breakdown, and source attribution.
+
+---
+
+## WordPress
+
+Lets agents publish articles directly to your WordPress blog.
+
+<Steps>
+  <Step title="Click Connect WordPress">
+    Enter your WordPress site URL.
+  </Step>
+  <Step title="Enter your credentials">
+    Provide your WordPress username and an **Application Password** — generated in WordPress under Users → Your Profile → Application Passwords.
+  </Step>
+  <Step title="Click Save">
+    The `wordpress-publish` tool is now available to content agents.
+  </Step>
+</Steps>
+
+---
+
+## HubSpot
+
+Pulls your HubSpot blog posts into the Content page and lets agents publish new posts.
+
+<Steps>
+  <Step title="Click Connect HubSpot">
+    Sign in with your HubSpot account and select your portal.
+  </Step>
+  <Step title="Grant the required scopes">
+    Accept the blog read/write permissions.
+  </Step>
+</Steps>
+
+**What unlocks:** Content page populates with your HubSpot posts; `hubspot-publish` tool available to agents.
+
+---
+
+## Sanity
+
+Lets agents publish structured content directly to your Sanity CMS.
+
+<Steps>
+  <Step title="Enter your Sanity project ID and dataset name">
+    Found in your Sanity project settings.
+  </Step>
+  <Step title="Enter a Sanity API write token">
+    Generate one at sanity.io → API → Tokens.
+  </Step>
+</Steps>
+
+**What unlocks:** `sanity-write` tool available to agents for publishing documents to your Sanity schema.
+
+---
+
+## Slack
+
+Sends run completion notifications to a Slack channel.
+
+<Steps>
+  <Step title="Click Connect Slack">
+    Authorise the Lantern Slack app in your workspace.
+  </Step>
+  <Step title="Select the channel">
+    Choose which channel to receive notifications.
+  </Step>
+</Steps>
+
+**What unlocks:** Agents can post custom messages on run completion (e.g. "New article published: [title]").
+
+---
+
+## Google Ads
+
+Provides campaign performance context for ad creation agents.
+
+<Steps>
+  <Step title="Click Connect Google Ads">
+    Sign in with Google and grant read/write access.
+  </Step>
+  <Step title="Select your account">
+    The `google-ads-campaign-builder` tool can now reference your existing campaigns when building new ones.
+  </Step>
+</Steps>

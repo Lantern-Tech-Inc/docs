@@ -1,0 +1,95 @@
+---
+title: "Agents"
+description: "Build, manage, and run automated marketing workflows."
+---
+
+An agent is a reusable workflow with a goal, a set of tools, and an optional schedule. Configure the goal once — the agent runs it every time, manually or on a schedule.
+
+## How agents work
+
+Each agent runs a sequence of AI-powered steps:
+
+1. **Research** — searches Google, reads competitor pages, mines Reddit, pulls Search Console data
+2. **Planning** — builds a keyword brief, generates an outline, brainstorms titles
+3. **Execution** — writes content section by section, runs QA passes
+4. **Delivery** — publishes to your CMS, posts to Slack, or emails you the result
+
+## Creating an agent
+
+**From the Home chat (recommended for new users)**
+
+Type your goal in the Home chat. The assistant will ask clarifying questions and launch the workflow automatically.
+
+**From the Agents page**
+
+1. Click **+ New Agent** in the top right.
+2. Give the agent a name and optional description.
+3. Lantern opens the agent builder where you configure tools, goal, and schedule.
+
+## The agent builder
+
+The left panel of any agent's detail page is a conversational interface. Type instructions directly to configure the agent:
+
+- "Focus this agent on long-form thought leadership content"
+- "Add voice and tone QA to the pipeline"
+- "Schedule this to run every Monday at 9am"
+
+The AI interprets your instructions and updates the agent configuration accordingly.
+
+## Running an agent
+
+Click **Run** in the top right of the agent detail page to trigger it immediately. A live step list appears in the right panel showing exactly what the AI is doing.
+
+**What the steps look like:**
+
+| What's happening | What you see |
+|---|---|
+| Searching for keyword data | Studying the rankings for "your keyword" |
+| Finding audience questions | Mining questions people ask about "your keyword" |
+| Browsing Reddit | Eavesdropping on Reddit for "your keyword" |
+| Reading a competitor page | Reading competitor.com |
+| Writing a section | Writing: "Section heading from your outline" |
+| Polishing the draft | Polishing the flow and fixing transitions |
+| Checking brand voice | Checking voice and tone consistency |
+| Publishing | Publishing "Article title" to WordPress |
+
+## Viewing results
+
+When a run completes, the result appears in the right panel:
+
+| Agent type | Output |
+|---|---|
+| Content | Full rich-text article, editable inline |
+| SEO | Structured audit report with scores and recommendations |
+| Ads | Campaign copy with headlines, descriptions, and targeting notes |
+| Research | Structured document with cited sources |
+| PR | Press release or pitch copy |
+
+For content runs, a rich-text editor opens inline — edit, format, and save directly. If your CMS is connected, a **Publish** button appears to push content live.
+
+## Scheduling
+
+Tell the agent builder in plain English:
+
+- "Run every Monday at 8am"
+- "Run daily at 6am"
+- "Run on the first of every month"
+
+Scheduled agents appear in the **Scheduled** tab of the Agents page.
+
+## Templates
+
+Pre-built starting points available from the **Templates** tab:
+
+| Template | What it does |
+|---|---|
+| SEO Blog Post | Research, outline, write, and publish a full article from a keyword |
+| Competitor Gap Analysis | Find topics competitors rank for that you haven't covered |
+| AI Brand Visibility Monitor | Track brand mentions across ChatGPT, Claude, Perplexity, Gemini |
+| Content Refresh | Identify pages losing traffic and regenerate updated drafts |
+
+## Managing agents
+
+- **Search** — filter agents by name using the search bar
+- **Filter by owner** — toggle **Anyone / Me** to see all workspace agents or only your own
+- **Delete** — click `⋯` on any agent card → **Delete**. This permanently removes the agent and all run history

@@ -14,46 +14,52 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
-              "quickstart"
+              "quickstart",
+              "onboarding"
             ]
           },
           {
-            "group": "Agents",
+            "group": "Core Features",
             "pages": [
-              "agents/what-are-agents",
-              "agents/getting-started",
-              "agents/agentic-mode",
-              "agents/tools-reference",
-              "agents/examples"
+              "home",
+              "agents",
+              "projects",
+              "content"
             ]
           },
           {
-            "group": "Technical Optimization",
+            "group": "Analytics",
             "pages": [
-              "technical/robots-txt",
-              "technical/sitemap",
-              "technical/llms-txt",
-              "technical/security",
-              "technical/core-web-vitals"
+              "analytics/ai-visibility",
+              "analytics/traffic",
+              "analytics/citations",
+              "analytics/prompt-analysis"
             ]
           },
           {
-            "group": "Content Structure",
+            "group": "SEO",
             "pages": [
-              "content/structured-data",
-              "content/meta-tags",
-              "content/heading-structure",
-              "content/hreflang"
+              "seo/overview",
+              "seo/site-audit",
+              "seo/search-console"
             ]
           },
           {
-            "group": "GEO Strategy",
+            "group": "Brand Kit",
             "pages": [
-              "geo/what-is-geo",
-              "geo/geo-vs-seo"
+              "brand-kit/brand-book",
+              "brand-kit/knowledge-bases"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "settings/integrations",
+              "settings/team",
+              "settings/billing"
             ]
           }
         ]

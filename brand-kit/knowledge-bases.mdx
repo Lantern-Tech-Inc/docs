@@ -1,0 +1,27 @@
+---
+title: "Knowledge Bases"
+description: "Give your agents access to your proprietary content and documents."
+---
+
+Knowledge Bases are collections of documents and web pages that agents can reference when generating content. This keeps outputs grounded in your actual product and brand — not generic web data.
+
+## Use cases
+
+- Upload **product documentation** so agents reference accurate feature descriptions
+- Upload **case studies** so agents cite real customer outcomes in articles
+- Upload **brand guidelines** so agents know which language to use and avoid
+- Upload **past blog posts** so agents build on existing work rather than duplicating it
+
+## Creating a knowledge base
+
+1. Click **New Knowledge Base**
+2. Give it a name (e.g. "Product Docs", "Case Studies")
+3. Add content by uploading files (PDF, Word, plain text) or providing URLs for Lantern to fetch
+
+## How agents use knowledge bases
+
+Lantern uses vector embeddings for knowledge base search. When an agent runs with the `search-knowledge-base` tool, it semantically matches its working context against all documents in your knowledge bases and retrieves the most relevant passages.
+
+<Tip>
+  Connect your knowledge base to content agents for significantly more accurate outputs. Agents with access to your product docs won't fabricate feature descriptions or use outdated information.
+</Tip>
