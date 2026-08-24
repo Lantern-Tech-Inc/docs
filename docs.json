@@ -64,6 +64,12 @@
               "settings/team",
               "settings/billing"
             ]
+          },
+          {
+            "group": "MCP",
+            "pages": [
+              "mcp/lantern"
+            ]
           }
         ]
       },
