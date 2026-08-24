@@ -1,0 +1,357 @@
+---
+title: "Lantern MCP for Claude"
+description: "Connect Lantern to Claude for AI search visibility, brand intelligence, and project context."
+icon: "lightbulb"
+---
+
+Connect Lantern to Claude to bring your AI search visibility, brand intelligence, marketing briefs, citation opportunities, and project context into the conversations where your team plans work.
+
+Lantern MCP gives Claude access to the Lantern information your account is already authorized to view. Use it to turn current marketing intelligence into focused analysis, preparation, and next-step recommendations.
+
+## What Lantern MCP Does
+
+Lantern helps teams understand how their brands are represented in AI search and organize the work needed to improve that representation. The Lantern MCP connector lets Claude work with that information in context.
+
+After connecting, you can ask Claude to:
+
+- Identify the Lantern brands you can access.
+- Review a brand's positioning and marketing context.
+- Summarize AI visibility over a chosen time period.
+- Prioritize citation opportunities.
+- Review the latest marketing intelligence brief and pending approvals.
+- Search project work by topic and retrieve a specific project item.
+
+The connector is designed for marketing leaders, SEO and content teams, agencies, and brand teams that need clear answers from their existing Lantern intelligence.
+
+## What Lantern MCP Does Not Do
+
+Lantern MCP is read-only. It cannot:
+
+- Create, edit, publish, approve, or delete Lantern data.
+- Change brand settings or user access.
+- Run campaigns or make changes in third-party systems.
+- Access brands, projects, or other information outside the signed-in user's Lantern permissions.
+
+Use Claude's output to inform your work, then make any changes through Lantern and your normal team workflows.
+
+## Connect Lantern to Claude
+
+### From the Connectors Directory
+
+When Lantern is available in the Claude Connectors Directory:
+
+1. Open **Customize > Connectors** in Claude.
+2. Search for **Lantern**.
+3. Select **Connect**.
+4. Sign in to your Lantern account when prompted.
+5. Review the connection details and select **Allow connection**.
+6. Enable Lantern in the conversation where you want to use it.
+
+Your organization may require an administrator to approve or enable connectors before you can connect Lantern.
+
+### Add Lantern as a Custom Connector
+
+If Lantern is not yet available in your Claude connector directory, you can add it as a custom connector.
+
+#### Claude Pro or Max
+
+1. In Claude, open **Customize > Connectors**.
+2. Select **Add custom connector**.
+3. Enter this server URL:
+
+   ```text
+   https://api.asklantern.com/mcp
+   ```
+
+4. Open **Advanced settings**.
+5. Set authentication to **Always required**.
+6. Under **OAuth client**, select **Use your own OAuth client**.
+7. Enter the following Client ID:
+
+   ```text
+   80913b5b-a933-498c-9dc6-dad08ca66a8b
+   ```
+
+8. Leave the Client Secret blank.
+9. Keep **Streamable HTTP** selected, then select **Add**.
+10. Sign in to Lantern and select **Allow connection**.
+
+#### Claude Team or Enterprise
+
+1. An organization owner opens **Organization settings > Connectors**.
+2. Select **Add**, then **Custom**.
+3. Add the Lantern server URL and OAuth settings above.
+4. Save the connector for the organization.
+5. Each member opens **Customize > Connectors**, finds Lantern, and connects their own Lantern account.
+
+Each person authorizes access to their own Lantern account. Connecting Lantern does not grant access to data a person cannot already view in Lantern.
+
+## Before You Connect
+
+To use Lantern MCP, you need:
+
+- An active Lantern account.
+- Access to at least one Lantern brand or project.
+- A Claude plan that supports connectors or a Claude organization where an administrator has enabled connectors.
+- Permission to connect third-party services if your Claude organization requires administrator approval.
+
+If you are unsure which Lantern account to use, sign in to Lantern first and confirm that you can view the relevant brand before connecting Claude.
+
+## Getting Started
+
+Start by asking Claude what Lantern data is available to you:
+
+```text
+List my Lantern brands and give me a short description of each one.
+```
+
+Then choose a brand and ask a focused question:
+
+```text
+For [brand name], summarize the strongest AI visibility opportunity and explain why it matters.
+```
+
+Claude may ask you to choose a brand when more than one is available. You can respond with the brand name, or ask Claude to list your brands again.
+
+## Common Workflows
+
+### Review AI Search Visibility
+
+Use Lantern to understand how a brand is appearing in AI search and identify where attention is needed.
+
+```text
+Review AI visibility for [brand name] over the last 30 days. Summarize the key trend, the most important gap, and the first action I should take.
+```
+
+```text
+Compare the last 30 days of AI visibility for [brand name] with the previous period. Focus on practical implications for the marketing team.
+```
+
+### Identify Citation Opportunities
+
+Ask Claude to turn Lantern's citation intelligence into a prioritized outreach or content plan.
+
+```text
+Show the top citation opportunities for [brand name]. Prioritize them by likely impact and explain the recommended next step for each.
+```
+
+```text
+Find citation opportunities for [brand name] that could support a content-led authority strategy. Group them into quick wins, strategic opportunities, and items to monitor.
+```
+
+### Prepare a Brand Briefing
+
+Bring together positioning, visibility, and current marketing context before a meeting or planning session.
+
+```text
+Create a concise briefing for [brand name] using its Lantern brand overview, AI visibility, citation opportunities, and latest marketing brief.
+```
+
+```text
+I am preparing for a strategy meeting about [brand name]. What does Lantern indicate is working, what is at risk, and what should we decide next?
+```
+
+### Review Marketing Intelligence
+
+Use the latest Lantern brief to turn existing intelligence into a clear set of priorities.
+
+```text
+Review the latest Lantern marketing brief for [brand name]. Identify the three highest-value actions that do not require a new campaign.
+```
+
+```text
+Summarize the pending approvals and open questions in the current marketing brief for [brand name].
+```
+
+### Find Project Context
+
+Search existing Lantern project work before creating new plans or content.
+
+```text
+Find project items about [topic] for [brand name], then summarize the most recent approved direction.
+```
+
+```text
+Search Lantern projects for [brand name] for work related to [topic]. Show the most relevant items and tell me what decisions have already been made.
+```
+
+### Turn Intelligence Into a Working Plan
+
+Ask Claude to synthesize Lantern data into a plan, while keeping the plan separate from changes in Lantern.
+
+```text
+Based on Lantern's current visibility data, citation opportunities, and marketing brief for [brand name], propose a 30-day plan with the highest-impact actions first.
+```
+
+```text
+Use Lantern information for [brand name] to draft a meeting agenda for the marketing team. Include decisions we need to make, evidence from Lantern, and suggested owners.
+```
+
+## Available Lantern Information
+
+Lantern MCP can retrieve the following information for the connected user:
+
+| Area | What Claude Can Help With |
+| --- | --- |
+| Brands | Find the Lantern brands available to you. |
+| Brand overview | Review positioning and marketing context for a brand. |
+| AI visibility | Summarize aggregated AI visibility for a selected time period. |
+| Citation opportunities | Identify and prioritize citation opportunities. |
+| Marketing brief | Review the latest marketing intelligence brief and pending approvals. |
+| Projects | Search project items and retrieve the content of a specific accessible item. |
+
+Claude selects the appropriate Lantern information based on your request. For best results, include the brand name, the question you want answered, and the outcome you need.
+
+## Tips for Better Results
+
+- Start with a clear brand name when you work with multiple brands.
+- Ask for a specific time period when reviewing visibility.
+- State the audience for the answer, such as a leadership team, content team, or client.
+- Ask Claude to distinguish facts from recommendations.
+- Use Lantern project search before starting a new strategy, brief, or content plan.
+- Request concise output when preparing for a meeting and more detailed analysis when planning work.
+
+For example:
+
+```text
+For [brand name], give me a five-bullet executive summary of the current AI search position. Separate Lantern facts from your recommendations.
+```
+
+## Permissions and Data Access
+
+Lantern MCP uses the Lantern account you sign in with during connection.
+
+Claude can only retrieve information that account is already authorized to access. This includes the brands and project items visible to you in Lantern. If a brand or project does not appear in Claude, check your access in Lantern before retrying.
+
+The connector is read-only. Claude does not receive permission to change Lantern data when you connect it.
+
+Review the connection details before selecting **Allow connection**. You can remove access at any time.
+
+## Manage or Remove Access
+
+To disconnect Lantern from Claude:
+
+1. Open **Customize > Connectors** in Claude.
+2. Select Lantern.
+3. Choose **Remove** or disconnect the connector.
+
+You can also remove an authorized connection from Lantern:
+
+1. Open Lantern.
+2. Go to **Settings > Connected Apps**.
+3. Find the Claude connection.
+4. Revoke access.
+
+Revoking access prevents Claude from using Lantern on your behalf. You can reconnect later and approve access again.
+
+## Privacy and Security
+
+Only connect Lantern to Claude when you trust the Claude account and workspace you are using.
+
+- Do not include passwords, API keys, access tokens, or other credentials in your prompts.
+- Review the information Claude returns before sharing it outside your organization.
+- Use the connector with the Lantern account that has the intended level of access.
+- Disconnect the connector when it is no longer needed.
+
+For Lantern's data practices, see the [Lantern Privacy Policy](https://www.asklantern.com/privacy). For the terms that govern Lantern, see the [Lantern Terms](https://www.asklantern.com/terms).
+
+## Troubleshooting
+
+### I cannot find Lantern in the directory
+
+Lantern may not yet be enabled for your Claude plan, workspace, or region. Ask your Claude organization administrator whether third-party connectors are available and approved. You can use the custom connector setup when it is available to your plan.
+
+### Claude says the connector cannot connect
+
+Confirm that the server URL is exactly:
+
+```text
+https://api.asklantern.com/mcp
+```
+
+For a custom connector, confirm that you selected **Always required**, added the listed OAuth Client ID in Advanced settings, left the Client Secret blank, and selected Streamable HTTP.
+
+Then remove the connector, add it again, and complete the Lantern sign-in flow in the same browser session.
+
+### I signed in, but the connection did not finish
+
+Return to Claude's connector settings and select **Reconnect** for Lantern. If the problem continues, record the time of the attempt and any Claude reference ID shown in the error, then contact Lantern support.
+
+Do not send passwords, access tokens, Client Secrets, or other credentials to support.
+
+### A brand or project is missing
+
+Claude only sees the Lantern data available to the signed-in account. Open Lantern and confirm that you can access the relevant brand or project. If access was recently granted, reconnect the connector and try again.
+
+### Claude's answer does not match what I expected
+
+Ask Claude to identify the Lantern information it used, narrow the request to a specific brand or period, or request a factual summary before asking for recommendations.
+
+For example:
+
+```text
+For [brand name], summarize only the Lantern data available for the last 30 days. Do not make recommendations yet.
+```
+
+## Support
+
+When contacting Lantern support about the connector, include:
+
+- The approximate date and time of the issue.
+- Whether you were adding, reconnecting, or using the connector.
+- The brand or workflow you were trying to use, without sharing sensitive content.
+- Any Claude reference ID shown in the error message.
+
+Do not include access tokens, passwords, Client Secrets, API keys, or other credentials.
+
+## Frequently Asked Questions
+
+### Does Lantern MCP change my Lantern data?
+
+No. The connector is read-only. It can retrieve authorized information but cannot create, edit, publish, approve, or delete Lantern data.
+
+### Can everyone in my company see the same Lantern information?
+
+No. Each person connects their own Lantern account. Claude can only retrieve the information that the connected account is allowed to access.
+
+### Can I use Lantern MCP in any Claude conversation?
+
+Enable Lantern for the conversation where you want to use it. Your Claude plan or organization settings may determine where connectors are available.
+
+### Can I disconnect Lantern later?
+
+Yes. Remove Lantern from Claude's connector settings or revoke the Claude connection from Lantern's **Connected Apps** settings.
+
+### Does Claude automatically take action based on Lantern data?
+
+No. Lantern MCP provides read-only context. Claude can analyze and recommend, but it does not make changes to Lantern or publish work on your behalf through this connector.
+
+## Example Team Prompts
+
+### Leadership
+
+```text
+Give me an executive-ready update on [brand name]. Summarize AI visibility, the most important citation opportunity, and the decision we should make this week.
+```
+
+### Content and SEO
+
+```text
+For [brand name], use Lantern to identify the most important AI search visibility gap. Recommend a content brief direction, but clearly separate Lantern facts from your proposed approach.
+```
+
+### Agency Account Management
+
+```text
+Prepare a client check-in summary for [brand name] using the latest Lantern information. Include progress, opportunities, risks, and questions for the client.
+```
+
+### Marketing Operations
+
+```text
+Search Lantern project items for [brand name] related to [topic]. Summarize the current status, prior decisions, and the next coordination step.
+```
+
+## Learn More
+
+Visit [Lantern](https://www.asklantern.com/) to learn more about AI search visibility and marketing intelligence.
