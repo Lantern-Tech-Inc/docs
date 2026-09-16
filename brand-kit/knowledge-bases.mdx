@@ -1,27 +1,23 @@
----
-title: "Knowledge Bases"
-description: "Give your agents access to your proprietary content and documents."
----
+title: "Knowledge bases"
+description: "Add approved sources that give authorized Lantern work reliable brand context."
 
-Knowledge Bases are collections of documents and web pages that agents can reference when generating content. This keeps outputs grounded in your actual product and brand — not generic web data.
+Knowledge bases give agents approved internal sources to retrieve when public web evidence is not enough.
 
-## Use cases
+## Supported sources
 
-- Upload **product documentation** so agents reference accurate feature descriptions
-- Upload **case studies** so agents cite real customer outcomes in articles
-- Upload **brand guidelines** so agents know which language to use and avoid
-- Upload **past blog posts** so agents build on existing work rather than duplicating it
+Add webpages or upload PDF, DOCX, and TXT files.
 
-## Creating a knowledge base
+## Processing states
 
-1. Click **New Knowledge Base**
-2. Give it a name (e.g. "Product Docs", "Case Studies")
-3. Add content by uploading files (PDF, Word, plain text) or providing URLs for Lantern to fetch
+- Pending: waiting to begin.
+- Processing: content is being extracted and prepared.
+- Ready: available for retrieval.
+- Failed: processing did not complete.
 
-## How agents use knowledge bases
+## How retrieval works
 
-Lantern uses vector embeddings for knowledge base search. When an agent runs with the `search-knowledge-base` tool, it semantically matches its working context against all documents in your knowledge bases and retrieves the most relevant passages.
+Lantern divides sources into searchable passages and retrieves relevant context for an authorized agent request. A knowledge base does not force every passage into every request.
 
-<Tip>
-  Connect your knowledge base to content agents for significantly more accurate outputs. Agents with access to your product docs won't fabricate feature descriptions or use outdated information.
-</Tip>
+## Good source hygiene
+
+Use current product documentation, approved claims, brand guidance, research, and case studies. Remove obsolete sources and avoid uploading credentials or secrets.
