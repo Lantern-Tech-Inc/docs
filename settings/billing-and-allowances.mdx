@@ -1,0 +1,20 @@
+---
+title: "Billing, allowances, and limits"
+description: "Understand included runs, concurrency, seats, workspaces, and subscription management."
+---
+
+Billing shows the current plan, subscription status, included usage, seats, workspaces, and renewal timing.
+
+## What consumes an agent run
+
+One accepted specialist run consumes one included run. Internal continuation turns and infrastructure retries do not consume another run. Manual retries create new work and may consume another run.
+
+Beam consumes one run for each selected cell.
+
+## Concurrency
+
+Concurrency is shared across the organization. Accepted work above the plan limit waits until capacity is available.
+
+## Manage billing
+
+Use the Stripe billing portal to manage supported payment methods, invoices, and subscription changes.

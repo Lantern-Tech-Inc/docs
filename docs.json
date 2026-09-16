@@ -14,81 +14,74 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "Getting started",
             "pages": [
               "index",
-              "who-its-for",
-              "pricing",
-              "landscape",
               "quickstart",
-              "onboarding"
+              "onboarding",
+              "who-its-for"
             ]
           },
           {
-            "group": "Core Features",
+            "group": "LanternIQ",
             "pages": [
-              "home",
-              "agents",
-              "projects",
-              "content"
+              "lanterniq/overview",
+              "lanterniq/conversations-and-context",
+              "lanterniq/evidence-and-investigations",
+              "lanterniq/initiatives-approvals-measurement"
             ]
           },
           {
             "group": "Analytics",
             "pages": [
+              "analytics/overview",
               "analytics/ai-visibility",
-              "analytics/traffic",
               "analytics/citations",
-              "analytics/prompt-analysis"
+              "analytics/prompt-analysis",
+              "analytics/traffic",
+              "seo/search-console",
+              "seo/site-audit"
             ]
           },
           {
-            "group": "SEO",
+            "group": "Execution",
             "pages": [
-              "seo/overview",
-              "seo/site-audit",
-              "seo/search-console"
+              "agents/overview",
+              "agents/specialist-catalog",
+              "agents/runs-progress-recovery",
+              "beam/overview",
+              "projects",
+              "content"
             ]
           },
           {
-            "group": "Brand Kit",
+            "group": "Brand context",
             "pages": [
-              "brand-kit/brand-book",
+              "brand-kit/overview",
               "brand-kit/knowledge-bases"
             ]
           },
           {
-            "group": "Settings",
+            "group": "Integrations",
             "pages": [
-              "settings/integrations",
-              "settings/team",
-              "settings/billing"
+              "integrations/overview",
+              "integrations/contentful",
+              "mcp/lantern",
+              "settings/connected-apps"
             ]
           },
           {
-            "group": "MCP",
+            "group": "Workspace administration",
             "pages": [
-              "mcp/lantern"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API reference",
-        "groups": [
-          {
-            "group": "API documentation",
-            "pages": [
-              "api-reference/introduction"
+              "settings/team-and-agency-access",
+              "settings/billing-and-allowances"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Trust and support",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "troubleshooting",
+              "release-notes"
             ]
           }
         ]

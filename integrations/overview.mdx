@@ -1,0 +1,29 @@
+---
+title: "Integrations"
+description: "Connect approved data sources, publishing systems, communication channels, and advertising accounts."
+---
+
+Integrations connect Lantern to approved data sources, publishing systems, communication channels, and advertising accounts.
+
+| Integration | Primary use | Typical access |
+| --- | --- | --- |
+| Google Search Console | Search queries and page performance | Read only |
+| Google Analytics | Traffic and AI referrals | Read only |
+| Google Ads | Campaign context and supported campaign workflows | Read and workflow-dependent write |
+| Contentful | CMS content drafts | Content management |
+| Sanity | Structured CMS documents | Token-defined write access |
+| WordPress | Content drafts or publication | Site-defined application access |
+| HubSpot | Blog content | OAuth content access |
+| Slack | Selected notifications | Incoming webhook |
+
+## Before connecting
+
+Confirm the account, property, site, environment, dataset, or channel. Grant only the access required for the intended workflow.
+
+## Publishing behavior
+
+Lantern can create CMS drafts in connected systems. Live publishing depends on connector configuration, workflow policy, user permissions, and an approval boundary. Do not assume that connecting a CMS enables unattended publication.
+
+## Disconnecting
+
+Disconnecting prevents future access but does not automatically remove data already imported into Lantern or work already created in the external system.

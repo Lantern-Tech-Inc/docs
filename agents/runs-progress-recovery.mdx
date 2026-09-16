@@ -1,0 +1,26 @@
+---
+title: "Runs, progress, and recovery"
+description: "Understand agent run states, usage, concurrency, and retries."
+---
+
+An agent run is one accepted execution of a specialist workflow.
+
+## Run states
+
+A run can be queued, running, awaiting review, complete, failed, or cancelled. Linked work and Project outputs remain available after the run finishes.
+
+## Usage
+
+One accepted run consumes one included run. Continuation turns and infrastructure retries do not consume another run. A manual retry starts new work and may consume another run.
+
+## Concurrency
+
+Your plan controls how many runs can execute at once across the organization. Additional accepted work remains queued until capacity is available.
+
+## Stop and retry
+
+Stop requests cancellation of active work. Some external operations may already have completed before cancellation is observed. Retry starts another attempt using the available saved context.
+
+## Recovery
+
+Lantern monitors queued and running work for stalled progress and can safely re-enqueue eligible work. Safeguards prevent the same accepted request from being charged or executed twice during infrastructure retries.
